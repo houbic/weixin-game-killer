@@ -98,6 +98,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>killer</finalName>
+		<finalName>weixin-game-killer</finalName>
 	</build>
 </project>
