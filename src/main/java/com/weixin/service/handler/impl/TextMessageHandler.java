@@ -38,7 +38,7 @@ public class TextMessageHandler implements MessageHandler {
 		String resContent = null;
 		if (number == null) {
 			resContent = Constants.ERROR_TEXT_MSG_TYPE;
-		} else if (number > 100) {
+		} else if (number < 20) {
 			resContent = CreateRoom.createRoom(number, textMessage);
 		} else {
 			resContent = JoinGame.joinGame(number, textMessage);

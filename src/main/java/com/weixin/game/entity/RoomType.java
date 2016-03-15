@@ -5,7 +5,22 @@ package com.weixin.game.entity;
 public enum RoomType {
 
 	// 普通类型
-	four(4, 2, 1, 1);
+	four(4, 2, 1, 1),
+	five(5, 3, 1, 1),
+	six(6, 4, 1, 1),
+	seven(7, 5, 1, 1),
+	eight(8, 6, 1, 1),
+	nine(9, 5, 2, 2),
+	ten(10, 6, 2, 2),
+	eleven(11, 7, 2, 2),
+	twelve(12, 6, 3, 3),
+	thirteen(13, 7, 3, 3),
+	fourteen(14, 8, 3, 3),
+	fifteen(15, 9, 3, 3),
+	sixteen(16, 8, 4, 4),
+	seventeen(17, 9, 4, 4),
+	eighteen(18, 10, 4, 4),
+	nineteen(19, 11, 4, 4);
 
 	// 人数
 	private int	number;
