@@ -35,6 +35,11 @@ public class JoinGame {
 			parameter.setUserId(userId);
 			parameter.setRoomNo(roomNo);
 			Room room = CreateRoom.getRoom(roomNo);
+			for (Parameter existParameter : room.getParameterList()) {
+				if (existParameter.getUserId().equals(userId)) {
+					return String.format(Constants.ERROR_HAVEN_JOINED_GAME, RoleType.getRoleByType(existParameter.getRoleType()).getRole());
+				}
+			}
 			RoleType role = RoleType.getRole(room);
 			parameter.setRoleType(role.getRoleType());
 			parameter.setRoomNo(roomNo);

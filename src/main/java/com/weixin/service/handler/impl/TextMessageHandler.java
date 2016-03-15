@@ -1,8 +1,5 @@
 package com.weixin.service.handler.impl;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -29,13 +26,14 @@ public class TextMessageHandler implements MessageHandler {
 		resTextMessage.setFromUserName(textMessage.getToUserName());
 		resTextMessage.setCreateTime(System.currentTimeMillis());
 		resTextMessage.setMsgType(HandlerType.text.getMsgType());
+		String resContent = null;
 		if (isSetNickName(content)) { //设置昵称
 			String nickName = SettingNickName.settingNickName(userId, content);
-			resTextMessage.setContent(nickName);
+			resContent = String.format(Constants.SET_NICK_NAME_SUCCESS, nickName);
+			resTextMessage.setContent(resContent);
 			return ReportUtils.getResReport(resTextMessage, ReportUtils.TEXT_TEMPLATE);
 		}
 		Integer number = getNumber(content);
-		String resContent = null;
 		if (number == null) {
 			resContent = Constants.ERROR_TEXT_MSG_TYPE;
 		} else if (number < 20) {
@@ -62,13 +60,11 @@ public class TextMessageHandler implements MessageHandler {
 		}
 	}
 	
-	public boolean isSetNickName(String content){
+	public static boolean isSetNickName(String content){
 		if (StringUtils.isBlank(content) || content.length() < 3) {
 			return false;
 		}
-		Pattern pattern = Pattern.compile("#[*]+#");
-		Matcher setNickNameCmd = pattern.matcher(content);
-		if (setNickNameCmd.matches()) {
+		if (content.startsWith("#") && content.endsWith("#")) {
 			return true;
 		}
 		return false;

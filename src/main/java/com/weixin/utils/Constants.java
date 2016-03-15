@@ -11,6 +11,7 @@ public interface Constants {
 	String	BEGIN_GAME_MESSAGE		= PropertiesUtil.getValue("BEGIN_GAME_MESSAGE");
 	String	CREATE_ROOM_SUCCESS		= PropertiesUtil.getValue("CREATE_ROOM_SUCCESS");
 	String  JOIN_ROOM_SUCCESS       = PropertiesUtil.getValue("JOIN_ROOM_SUCCESS");
+	String  SET_NICK_NAME_SUCCESS   = PropertiesUtil.getValue("SET_NICK_NAME_SUCCESS");
 
 	String	ERROR_CREATE_ROOM_FAIL	= PropertiesUtil.getValue("ERROR_CREATE_ROOM_FAIL");
 	String	ERROR_TEXT_MSG_TYPE		= PropertiesUtil.getValue("ERROR_TEXT_MSG_TYPE");
@@ -18,6 +19,7 @@ public interface Constants {
 	String	ERROR_ROOM_NO_EXISTS	= PropertiesUtil.getValue("ERROR_ROOM_NO_EXISTS");
 	String	ERROR_ROLE_NO_EXISTS	= PropertiesUtil.getValue("ERROR_ROLE_NO_EXISTS");
 	String	ERROR_JOIN_FULL_ROOM	= PropertiesUtil.getValue("ERROR_JOIN_FULL_ROOM");
+	String  ERROR_HAVEN_JOINED_GAME = PropertiesUtil.getValue("ERROR_HAVEN_JOINED_GAME");
 	String  ERROR_NO_SET_NICKNAME   = PropertiesUtil.getValue("ERROR_NO_SET_NICKNAME");
 	String  ERROR_OPERA_EXCETION    = PropertiesUtil.getValue("ERROR_OPERA_EXCETION");
 	
