@@ -7,8 +7,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,7 +20,7 @@ import org.w3c.dom.NodeList;
  */
 public class XmlUtil {
 	
-	private static final Logger log = LoggerFactory.getLogger(XmlUtil.class);
+	private static final Logger log = Logger.getLogger(XmlUtil.class);
 	
 	/**
 	 * xml String转map
@@ -51,7 +50,7 @@ public class XmlUtil {
             }
             return map;
 		} catch (Exception e) {
-			log.info("解析xml出错, input xml string:{}, error:{}", xmlString, e);
+			log.error("解析xml出错, error:{}", e);
 			return null;
 		}
     }

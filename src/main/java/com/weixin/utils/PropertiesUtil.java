@@ -6,8 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * 
@@ -17,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 public class PropertiesUtil {
 
-	private static Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
+	private static Logger logger = Logger.getLogger(PropertiesUtil.class);
 
 	private static Properties properties = null;
 

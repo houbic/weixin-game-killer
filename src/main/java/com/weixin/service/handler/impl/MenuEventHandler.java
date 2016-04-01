@@ -1,8 +1,7 @@
 package com.weixin.service.handler.impl;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.weixin.cache.KillerGameData;
@@ -19,12 +18,12 @@ import com.weixin.utils.ReportUtils;
 @Component
 public class MenuEventHandler implements MessageHandler {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MenuEventHandler.class);
+	private static final Logger logger = Logger.getLogger(MenuEventHandler.class);
 
 	@Override
 	public <T> String messageHandler(T message) {
 		MenuEvent menuEvent = (MenuEvent) message;
-		logger.debug("menuEvent:{}", JsonMapper.toJson(menuEvent));
+		logger.debug("menuEvent:" + JsonMapper.toJson(menuEvent));
 		ResTextMessage resTextMessage = new ResTextMessage();
 		resTextMessage.setToUserName(menuEvent.getFromUserName());
 		resTextMessage.setFromUserName(menuEvent.getToUserName());
@@ -42,7 +41,7 @@ public class MenuEventHandler implements MessageHandler {
 	public <T> boolean checkParams(T message) {
 		MenuEvent menuEvent = (MenuEvent) message;
 		if (StringUtils.isBlank(menuEvent.getEventKey())) {
-			logger.error("此按钮的key为空:{}", JsonMapper.toJson(menuEvent));
+			logger.error("此按钮的key为空:" + JsonMapper.toJson(menuEvent));
 			return false;
 		}
 		return true;

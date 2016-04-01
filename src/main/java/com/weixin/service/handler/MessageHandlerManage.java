@@ -4,8 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +21,7 @@ import com.weixin.utils.XmlUtil;
 @Component
 public class MessageHandlerManage {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MessageHandlerManage.class);
+	private static final Logger logger = Logger.getLogger(MessageHandlerManage.class);
 	
 	@Autowired
 	private TextMessageHandler textMessageHandler;
@@ -34,7 +33,7 @@ public class MessageHandlerManage {
 	public String messageHandler(HttpServletRequest request){
 		try {
 			String xmlString = Util.inputStreamToString(request.getInputStream());
-			logger.info("请求:{}", xmlString);
+			logger.info("请求:" + xmlString);
 			Map<String, String> requestMap = XmlUtil.getMapFromXml(xmlString);
 			String responseString = null;
 			//微信请求message类型
@@ -43,7 +42,7 @@ public class MessageHandlerManage {
 			String eventType = requestMap.get("Event");
 			//处理消息并返回
 			responseString = handler(requestMap, msgType, eventType);
-			logger.info("请求处理返回结果:{}", responseString);
+			logger.info("请求处理返回结果:" + responseString);
 			return responseString;
 		} catch (Exception e) {
 			logger.error("处理请求异常:{}", e);
@@ -54,7 +53,7 @@ public class MessageHandlerManage {
 	private String handler(Map<String, String> requestMap, String msgType, String eventType){
 		HandlerType handlerType = HandlerType.getHandlerType(msgType, eventType);
 		if (handlerType == null) {
-			logger.error("请求消息类型异常, 消息:{}", JsonMapper.toJson(requestMap));
+			logger.error("请求消息类型异常, 消息:" + JsonMapper.toJson(requestMap));
 			ResTextMessage resTextMessage = new ResTextMessage();
 			resTextMessage.setToUserName(requestMap.get("fromUserName"));
 			resTextMessage.setFromUserName(requestMap.get("toUserName"));
@@ -64,7 +63,7 @@ public class MessageHandlerManage {
 			return ReportUtils.getResReport(resTextMessage, ReportUtils.TEXT_TEMPLATE);
 		}
 		MessageHandler handler = getHandler(handlerType.getHandlerType());
-		logger.debug("requestMap:{}", JsonMapper.toJson(requestMap));
+		logger.debug("requestMap:" + JsonMapper.toJson(requestMap));
 		return handler.messageHandler(JsonMapper.fromJson(requestMap, handlerType.getMsgClass()));
 	}
 	

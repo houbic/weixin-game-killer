@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import com.weixin.service.handler.MessageHandlerManage;
 import com.weixin.utils.SignUtil;
@@ -19,7 +18,7 @@ public class WeixinService extends HttpServlet {
 	
 	private static final long	serialVersionUID	= -7125486482464576473L;
 
-	private static final Logger logger = LoggerFactory.getLogger(WeixinService.class);
+	private static final Logger logger = Logger.getLogger(WeixinService.class);
 	
 	public MessageHandlerManage messageHandlerManage = SpringContextUtil.getBean(MessageHandlerManage.class);
 	
@@ -68,7 +67,7 @@ public class WeixinService extends HttpServlet {
 		out.close();
 		out = null;
 		Long endTime = System.currentTimeMillis();
-		logger.info("处理请求结束, 总耗时{}", (endTime - startTime));
+		logger.info("处理请求结束, 总耗时:" + (endTime - startTime));
 	}
 	
 }

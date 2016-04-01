@@ -7,8 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import com.weixin.game.entity.Parameter;
 import com.weixin.game.entity.Room;
@@ -59,7 +58,7 @@ public class KillerGameData {
 }
 class CacheGC extends Thread {
 	
-	private static final Logger	logger	= LoggerFactory.getLogger(CacheGC.class);
+	private static final Logger	logger	= Logger.getLogger(CacheGC.class);
 	
 	@Override
 	public void run() {
@@ -71,12 +70,12 @@ class CacheGC extends Thread {
 			if (System.currentTimeMillis() > (Constants.GC_CACHE_TIME + roomCreateTime)) {
 				//移除房间信息
 				KillerGameData.rooms.remove(roomNo);
-				logger.debug("移除房间:{}", roomNo);
+				logger.debug("移除房间:" + roomNo);
 				//移除房主信息
 				if (KillerGameData.owners.containsKey(owner) && 
 						KillerGameData.owners.get(owner).intValue() == roomNo.intValue()) {
 					KillerGameData.owners.remove(owner);
-					logger.debug("移除房主:{}", owner);
+					logger.debug("移除房主:" + owner);
 				}
 			}
 		}
@@ -85,7 +84,7 @@ class CacheGC extends Thread {
 			String userId = entry.getValue().getUserId();
 			if (System.currentTimeMillis() > (Constants.GC_CACHE_TIME + joinTime)) {
 				KillerGameData.parameters.remove(userId);
-				logger.debug("移除参赛者:{}", userId);
+				logger.debug("移除参赛者:" + userId);
 			}
 		}
 		logger.info("回收游戏缓存数据【成功】===================================");

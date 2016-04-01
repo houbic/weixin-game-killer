@@ -1,7 +1,6 @@
 package com.weixin.game;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.weixin.cache.KillerGameData;
@@ -16,7 +15,7 @@ import com.weixin.utils.JsonMapper;
 @Component("joinGame")
 public class JoinGame {
 
-	private static final Logger				logger					= LoggerFactory.getLogger(WeixinService.class);
+	private static final Logger				logger					= Logger.getLogger(WeixinService.class);
 
 	public static synchronized String joinGame(Integer roomNo, TextMessage textMessage) {
 		try {
@@ -46,10 +45,10 @@ public class JoinGame {
 			parameter.setUserId(userId);
 			KillerGameData.addRole(parameter);
 			KillerGameData.addRoom(parameter);
-			logger.debug("加入房间后, 房间情况：{}", JsonMapper.toJson(CreateRoom.getRoom(roomNo)));
+			logger.debug("加入房间后, 房间情况：" + JsonMapper.toJson(CreateRoom.getRoom(roomNo)));
 			return String.format(Constants.JOIN_ROOM_SUCCESS, roomNo, role.getRole());
 		} catch (Exception e) {
-			logger.error("加入房间错误：{}, error:{}", JsonMapper.toJson(textMessage), e);
+			logger.error("加入房间错误：" + JsonMapper.toJson(textMessage) +", error:{}" , e);
 			return Constants.ERROR_OPERA_EXCETION;
 		}
 	}
